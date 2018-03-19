@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta lang="es">
+    <meta name="author" content="DH, Coudeu, Baier, Gaab, Ojeda">
+    <meta name="description" content="Huella Pet es tu Pet Shop amigo y lo mejor es que Online, no tenes que salir de tu casa, comprá lo que necesitas cuando queres.">
+    <meta name="keywords" content="Huella Pet, pet shop, online, mascota, alimentos, perro">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Huella Pet</title>
+
+    <link rel="stylesheet" type="text/css" href="./css/huellacss.css">
+    <link href="./css/styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
+  </head>
+
+
+  <!-- Encabezado -->
+
+  <body>
+      <div class="container">
+         <header>
+          <div class="datosarribacontacto">
+            <div class="dtc">
+            <img src="images/iconoemail.png" alt="email"><p>ventas@huellapet.com</p>
+            </div>
+            <div class="dtc">
+            <img src="images/iconowatsap.png" alt="email"><p>(011)1548352738</p>
+            </div>
+          </div>
+          <div class="encabezado" id="alturaencabezado">
+            <div class="cont-reg-carr">
+              <nav class="nav-reg">
+                <ul>
+                  <li><a href="./login.html">Ingresa</a></li>
+                  <li><a href="./registro.html">Registrate</a></li>
+                </ul>
+              </nav>  
+                
+              <div class="carrito">
+                  <img src="images/carrito.png" alt="email"><p>Carrito: Vacio</p>
+              </div>
+            </div>  
+            <div class="logo">
+              <img src="images/logo.png">
+            </div>
+            <nav class="navegadorprincipal">
+                <ul>
+                  <li><a href="./index.html">Home</a></li>
+                  <li><a href="./nosotros.html">Nosotros</a></li>
+                  <li><a href="./index.html">Tienda</a></li>
+                  <li><a href="./faqs.html">Preguntas</a></li>
+                  <li><a href="./index.html">Contacto</a></li>
+                </ul>
+            </nav>
+            <nav class="navegadorprincipalmobile">
+                        <div class="dropdown">
+                            <button class="dropbtn" onclick="desplegar(this)"><img src="images/logoMenu.png"></button>
+                            <div class="dropdown-content">
+                              <a href="./index.html">Home</a>
+                  <a href="./nosotros.html">Nosotros</a>
+                  <a href="#productos">Tienda</a>
+                  <a href="./faqs.html">Preguntas</a>
+                  <a href="#contacto">Contacto</a>
+                            </div>
+                        </div>
+                    </nav>
+          </div>  
+        </header>
+   </div>
+
+
+<!-- Formulario -->
+
+
+    <div class="newsleterr" onclick="contraer(this)">
+      <h3><strong>CREAR CUENTA</strong></h3>
+      <form class="contact_form" action="#" method="post" name="contact_form">
+      <ul>
+        <li>
+          <input type="text" name="Nombre" placeholder="*Nombre" required/>
+        </li>
+        <li>
+          <input type="text" name="Apellido" placeholder="*Apellido" required/>
+        </li>
+        <li>
+          <input type="text" name="email" placeholder="*Email" required/>
+        </li>
+        <li>
+          <select name="País" placeholder="País">
+            <option value="australia">Argentina</option>
+            <option value="canada">Uruguay</option>
+            <option value="usa">Brasil</option>
+            <option value="usa">Otro..</option>
+          </select>
+        </li>
+        <li>
+          <input type="password" name="Clave" placeholder="*Clave" required/>
+        </li>
+        <li>
+          <input type="password" name="Confirmar Clave" placeholder="*Confirmar Clave" required/>
+        </li>
+        <li>
+          <input type="submit" name="ENVIAR" value="Enviar">
+        </li>
+      </ul>
+      </form>
+      <p class="legales">Al registrarme, declaro que soy mayor de edad y acepto los Términos y condiciones y las Políticas de Huella Pet.</p>
+    </div>
+
+
+<!-- Footer -->
+
+
+    <footer>
+
+      <div class="seguinos">
+        <p class="legales2">Copy right Lorem ipsum dolor sit amet.</p>
+      </div>
+
+      <!-- <div class="seguinos">
+        <ul>
+          <li><a href="#"><i class="fa fa-github-square"></i></a></li>
+          <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+          <li><a href="#"><i class="fa fa-snapchat-square"></i></a></li>
+          <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+          <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+        </ul>
+      </div> -->
+
+    </footer>
+
+  </body>
+
+<script type="text/javascript">
+function desplegar(alturaencabezado){
+var obj = document.getElementById('alturaencabezado'); 
+obj.style.height = "380px";
+
+}
+function contraer(alturaencabezado){
+var obj = document.getElementById('alturaencabezado'); 
+obj.style.height = "230px";
+
+}
+
+</script>
+
+</html>
