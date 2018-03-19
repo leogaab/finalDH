@@ -198,6 +198,7 @@ input[type=submit]{
   background-color: #1e3a54;
   border: none;
   border-radius: 5px;
+  margin-left: 0%;
 }
 
 .legales {
@@ -223,11 +224,9 @@ input[type=submit]{
 	transform: translateX(-50%);
 }
 
-.seguinos{
-  display: inline-block;
+.seguinos {
+ 	display: inline-block;
 	background-color: #1e3a54;
-	height: 50px;
-	width: 100%;
 }
 
 .seguinos ul li {
@@ -243,4 +242,31 @@ input[type=submit]{
 	position: relative;
 	left: 50%;
 	transform: translateX(-50%);
+}
+
+@media (min-width: 1024px) {
+	.container {
+		max-width: 1440px;
+		margin: 0 15%;
+	}
+
+	.logo img {
+		width: 75%;
+	}
+}
+
+@media (min-width: 1440px) {
+	.container {
+		max-width: 2560px;
+		margin: 0 15%;
+	}
+
+	.logo {
+		display: flex;
+		justify-content: center;
+	}
+	
+	.logo img {
+		width: 50%;
+	}
 }
