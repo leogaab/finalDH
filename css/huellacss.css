@@ -75,6 +75,8 @@ body {
 	list-style: none;
 	text-align: center;
 	margin-right: 3%;
+	color:#ffffff;
+	font-size:0.8em;
 }
 
 .nav-reg ul li a {
@@ -313,7 +315,7 @@ body {
 }
 
 .contact_form ul li textarea[type=textarea]{
-	border: solid red 1px;
+	
 	height: 50px;
 	width: 80%;
 	padding: 5px 8px;
@@ -429,9 +431,12 @@ input[type=submit] {
 	}
 
 	.navegadorprincipal ul li {
+		
 	    list-style:none;
 	    text-align:center;
 	    padding:2%;
+		color: #ffffff;
+		font-size: 0.8em;
 	}
 
 	.navegadorprincipal ul li a {
@@ -452,11 +457,29 @@ input[type=submit] {
 	.dtc p {
 		font-size: 0.9em;
 	}
-
+	.nav-reg ul li {
+		
+		font-size: 1.1em;
+	}
+	
 	.nav-reg ul li a {
+		font-size: 1.1em;
+	}
+	.nav-reg ul li ul {
+		height:10px;
+		display: none;
+	}
+	.nav-reg ul li ul li {
+		height:10px;
+		
+	}
+	
+	.nav-reg ul li a:hover + ul, .nav-reg ul li ul:hover {
+		
+		display: block;
 		font-size: 1em;
 	}
-
+	
 	.carrito p {
 		font-size: 1em;
 	}
@@ -662,9 +685,34 @@ input[type=submit] {
 	}
 
 	.logo img {
-		width: 50%;
+		width:0%;
 	}
-
+	
+	.nav-reg ul {
+		display: flex;
+		padding: 0;
+		margin-top: 15px;
+		list-style: none;
+	}
+	.nav-reg a {
+		display: block;
+		padding: 1px;
+		background-color: #1E3A54;
+		text-decoration: none;
+		color: #191C26;
+	}
+	.nav-reg a:hover {
+		background-color: #1E3A54;
+	}
+	.nav-reg ul li ul {
+		margin-top: 2px;
+		display: none;
+		
+	}
+	.nav-reg ul li a:hover + ul, .nav-reg ul li ul:hover {
+		display: block;
+	}
+	
 	.product {
 		width: 30%;
 		margin-left: 0%;
@@ -698,7 +746,7 @@ input[type=submit] {
 	}
 
 	.ubicanos iframe {
-		border: solid red 1px;
+		
 		margin-top: 22px;
 	}
 
@@ -714,7 +762,7 @@ input[type=submit] {
 	}
 
 	.logo img {
-		width: 75%;
+		width:60%;
 	}
 }
 
@@ -730,7 +778,7 @@ input[type=submit] {
 	}
 	
 	.logo img {
-		width: 50%;
+		width: 60%;
 	}
 }
 

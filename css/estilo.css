@@ -126,7 +126,7 @@ padding: 0px;
 }
 
 .encontranos iframe{
-	border:solid red 1px;
+	
 	margin-top:22px;
 }
 
@@ -347,7 +347,7 @@ padding: 0px;
 	background-color: #fdf8dc;
 }
 .contact_form ul li textarea[type=textarea]{
-  border: solid red 1px;
+ 
   height:50px;
   width:80%;
   padding:5px 8px;
