@@ -315,7 +315,7 @@ body {
 }
 
 .contact_form ul li textarea[type=textarea]{
-	
+	border: solid red 1px;
 	height: 50px;
 	width: 80%;
 	padding: 5px 8px;
@@ -431,7 +431,6 @@ input[type=submit] {
 	}
 
 	.navegadorprincipal ul li {
-		
 	    list-style:none;
 	    text-align:center;
 	    padding:2%;
@@ -457,25 +456,15 @@ input[type=submit] {
 	.dtc p {
 		font-size: 0.9em;
 	}
-	.nav-reg ul li {
-		
-		font-size: 1.1em;
-	}
-	
+
 	.nav-reg ul li a {
 		font-size: 1.1em;
 	}
+
 	.nav-reg ul li ul {
-		height:10px;
 		display: none;
 	}
-	.nav-reg ul li ul li {
-		height:10px;
-		
-	}
-	
 	.nav-reg ul li a:hover + ul, .nav-reg ul li ul:hover {
-		
 		display: block;
 		font-size: 1em;
 	}
@@ -746,7 +735,7 @@ input[type=submit] {
 	}
 
 	.ubicanos iframe {
-		
+		border: solid red 1px;
 		margin-top: 22px;
 	}
 

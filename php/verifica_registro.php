@@ -11,7 +11,6 @@ if (!file_exists($verificarchivoexist)) {
  	$archivo = $nombreArchivoUsuario;
 	$datosAgragados = $contenido;
 	$datosusuario=file_put_contents($archivo, $datosAgragados, FILE_APPEND | LOCK_EX);
-	session_destroy();
 	header("Location:../login.php");
 	
 } else {

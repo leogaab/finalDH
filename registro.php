@@ -1,6 +1,85 @@
 <?php
 session_start();
+require_once('POO/registerOPP.php');
 
+
+  $nombre=null;
+  $apellido=null;
+  $email=null;
+  $clave=null;
+  $confirmaclave=null;
+  $archivo=null;
+
+
+$usuario =[
+  "nombre"=>$_POST,
+  "apellido"=>$_POST,
+  "email"=>$_POST,
+  "nacionalidad"=>$_POST,
+  "clave"=>$_POST,
+  "confirmaclave"=>$_POST,
+  "archivo"=>"archivo"
+];
+
+$usuarioValido=[];
+  foreach ($usuario as $nombreCampo => $tipoDato){
+    if($tipoDato ==$_POST){
+      if(array_Key_exists($nombreCampo,$_POST)){
+        $usuarioValido[$nombreCampo]=$_POST[$nombreCampo];
+      }
+    }elseif ($tipoDato == "archivo"){
+      
+      if(array_Key_exists($nombreCampo,$_FILES) && $_FILES["archivo"]["error"] === UPLOAD_ERR_OK){
+        $usuarioValido[$nombreCampo]=$usuario[$nombreCampo];
+        $nombre = $_FILES["archivo"]["name"];
+        
+        //$funcionpathinfo = pathinfo($nombre, PATHINFO_EXTENSION); // devuleve la extencion del archivo
+        $archivo = $_FILES["archivo"]["tmp_name"]; // C:\xampp\tmp\phpE633.tmp esta es la ruta dnd esta guardado el archivo
+
+        $ext = pathinfo($nombre, PATHINFO_EXTENSION); // te da la extencion del archiv 
+        
+        
+        $miArchivo = dirname(__FILE__); // en que carpeta estoy parado y ahi crea la carpeta espues con mkdir
+  
+        $nombrearchivo=$_POST["nombre"].rand(100,10000);
+        $nombre_carpeta = "foto_usuario/"; 
+
+        if(!is_dir($nombre_carpeta))
+        { 
+          mkdir($nombre_carpeta, 0777); // lectura escritura  
+        } else{$nombre_carpeta=$nombre_carpeta;}
+  
+        $miArchivo = $nombre_carpeta;// el nombre lo pongo a mano porque no toma la variable $nombre_carpeta
+        $miArchivo = $miArchivo.$nombrearchivo . "." . $ext;
+      
+        move_uploaded_file($archivo, $miArchivo);
+  
+        $miArchivo="./".$miArchivo;
+        
+      }
+      }
+    }
+
+  $countUsuarios=count($usuario);
+  $countValidos=count($usuarioValido);
+  if($countUsuarios==$countValidos){
+      //$hasclaveconf= password_hash($_POST["confirmaclave"], PASSWORD_DEFAULT);
+               
+      $_SESSION["nombre"] = $_POST["nombre"];
+      $_SESSION["apellido"] = $_POST["apellido"];
+      $_SESSION["email"] = $_POST["email"];
+      $_SESSION["nacionalidad"] = $_POST["nacionalidad"];
+      $_SESSION["clave"] = $_POST["clave"];
+      //$_SESSION["confirmaclave"] =$hasclaveconf;
+      $_SESSION["foto"] = $miArchivo;
+      
+    $usuario = new Usuario($_SESSION['nombre'], $_SESSION['apellido'], $_SESSION['email'], $_SESSION['clave'], $_SESSION['foto'], $_SESSION['nacionalidad']);
+    $usuario->save();
+    if($usuario){
+      header("Location:login.php");
+    }
+
+  }
 ?>
 <!DOCTYPE html>
 
@@ -38,19 +117,51 @@ session_start();
             </div>
           </div>
           <div class="encabezado" id="alturaencabezado">
-            <div class="cont-reg-carr">
-              
-            </div>  
+            <?php if ($_SESSION): $fotoUsuario = $_SESSION["foto"]; ?>
+            <div class='cont-reg-carr'>
+              <nav class='nav-reg'>
+                <ul>
+                <li><img src='<?= $fotoUsuario ?>' width='30px'></li>
+                <li><?php echo "Hola: " . $_SESSION['nombre'] ?></li>
+                  <li><a href=''>Mi Cuenta</a>
+                    <ul>
+                      <li><a href='./modificarDatos.php'>Modificar Datos</a></li>
+                      <li><a href='./cerrarSesion.php'>Salir</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </nav>
+              <div class='carrito'>
+                <img src='images/carrito.png' alt='email'><p>Carrito: Vacio</p>
+              </div>
+            </div>
+
+            <?php else: ?>
+
+            <div class='cont-reg-carr'>
+              <nav class='nav-reg'>
+                <ul>
+                  <li><a href='./login.php'>Ingresa</a></li>
+                  <li><a href='./registro.php'>Registrate</a></li>
+                </ul>
+              </nav>
+              <div class='carrito'>
+              <img src='images/carrito.png' alt='email'><p>Carrito: Vacio</p>
+              </div>
+            </div>
+
+            <?php endif; ?>
+            
             <div class="logo">
               <img src="images/logo.png">
             </div>
             <nav class="navegadorprincipal">
                 <ul>
                   <li><a href="./index.php">Home</a></li>
-                  <li><a href="./nosotros.html">Nosotros</a></li>
-                  <li><a href="./index.php">Tienda</a></li>
-                  <li><a href="./faqs.html">Preguntas</a></li>
-                  <li><a href="./index.php">Contacto</a></li>
+                  <li><a href="./nosotros.php">Nosotros</a></li>
+                  <li><a href="#productos">Tienda</a></li>
+                  <li><a href="./faqs.php">Preguntas</a></li>
+                  <li><a href="#contacto">Contacto</a></li>
                 </ul>
             </nav>
             <nav class="navegadorprincipalmobile">
@@ -58,10 +169,10 @@ session_start();
                             <button class="dropbtn" onclick="desplegar(this)"><img src="images/logoMenu.png"></button>
                             <div class="dropdown-content">
                               <a href="./index.php">Home</a>
-                              <a href="./nosotros.html">Nosotros</a>
-                              <a href="./index.php">Tienda</a>
-                              <a href="./faqs.html">Preguntas</a>
-                              <a href="./index.php">Contacto</a>
+                                <a href="./nosotros.php">Nosotros</a>
+                                <a href="./index.php">Tienda</a>
+                                <a href="./faqs.php">Preguntas</a>
+                                <a href="./index.php">Contacto</a>
                             </div>
                         </div>
                     </nav>
@@ -69,91 +180,6 @@ session_start();
         </header>
    </div>
 
-
-<!-- Formulario verificacion de datos en php -->
-    <?php
-
-  $nombre=null;
-  $apellido=null;
-  $email=null;
-  $clave=null;
-  $confirmaclave=null;
-  $archivo=null;
-  
-
-          
-       
-
-$usuario =[
-  "nombre"=>$_POST,
-  "apellido"=>$_POST,
-  "email"=>$_POST,
-  "nacionalidad"=>$_POST,
-  "clave"=>$_POST,
-  "confirmaclave"=>$_POST,
-  "archivo"=>"archivo"
-];
-
-$usuarioValido=[];
-  foreach ($usuario as $nombreCampo => $tipoDato){
-    if($tipoDato ==$_POST){
-      if(array_Key_exists($nombreCampo,$_POST)){
-        $usuarioValido[$nombreCampo]=$_POST[$nombreCampo];
-      }
-	
-	  
-	  
-    }elseif ($tipoDato == "archivo"){
-      
-      if(array_Key_exists($nombreCampo,$_FILES) && $_FILES["archivo"]["error"] === UPLOAD_ERR_OK){
-        $usuarioValido[$nombreCampo]=$usuario[$nombreCampo];
-        $nombre = $_FILES["archivo"]["name"];
-        
-        //$funcionpathinfo = pathinfo($nombre, PATHINFO_EXTENSION); // devuleve la extencion del archivo
-        $archivo = $_FILES["archivo"]["tmp_name"]; // C:\xampp\tmp\phpE633.tmp esta es la ruta dnd esta guardado el archivo
-
-        $ext = pathinfo($nombre, PATHINFO_EXTENSION); // te da la extencion del archiv 
-        
-        
-        $miArchivo = dirname(__FILE__); // en que carpeta estoy parado y ahi crea la carpeta espues con mkdir
-  
-        $nombrearchivo=$_POST["nombre"].rand(100,10000);
-        $nombre_carpeta = "foto_usuario/"; 
-
-        if(!is_dir($nombre_carpeta))
-        { 
-          mkdir($nombre_carpeta, 0777); // lectura escritura  
-        } else{$nombre_carpeta=$nombre_carpeta;}
-  
-        $miArchivo = $nombre_carpeta;// el nombre lo pongo a mano porque no toma la variable $nombre_carpeta
-        $miArchivo = $miArchivo.$nombrearchivo . "." . $ext;
-      
-        move_uploaded_file($archivo, $miArchivo);
-  
-        $miArchivo="./".$miArchivo;
-        
-      }
-      }
-    }
-
-  $countUsuarios=count($usuario);
-  $countValidos=count($usuarioValido);
-  if($countUsuarios==$countValidos){
-     $hasclave= password_hash($_POST["clave"], PASSWORD_DEFAULT);
-     
-             
-    $_SESSION["nombre"] = $_POST["nombre"];
-    $_SESSION["apellido"] = $_POST["apellido"];
-    $_SESSION["email"] = $_POST["email"];
-    $_SESSION["nacionalidad"] = $_POST["nacionalidad"];
-    $_SESSION["clave"] = $hasclave;
-    $_SESSION["foto"] = $miArchivo;
-    header("Location:./php/verifica_registro.php");
-  }
-
-
-
-?>
 <!-- Formulario html -->
     <div class="newsleterr" onclick="contraer(this)">
       <h3><strong>CREAR CUENTA</strong></h3>
@@ -184,10 +210,10 @@ $usuarioValido=[];
         </li>
         <li>
           <select name="nacionalidad" placeholder="Nacionalidad">
-            <option value="argentina">Argentina</option>
-            <option value="uruguay">Uruguay</option>
-            <option value="brasil">Brasil</option>
-            <option value="otro">Otro..</option>
+            <option value=1>Argentina</option>
+            <option value=2>Uruguay</option>
+            <option value=3>Brasil</option>
+            <option value=4">Otro..</option>
           </select>
         </li>
         <li>
@@ -201,7 +227,7 @@ $usuarioValido=[];
         </li>
         <li>
           <input type="password" name="confirmaclave" value='<?= array_key_exists('confirmaclave', $_POST) && $_POST['confirmaclave'] ? $_POST['confirmaclave'] : null; ?>' placeholder="*Confirmar Clave" />
-          <?php if (array_key_exists('confirmaclave', $_POST) && $_POST['confirmaclave']==null){
+          <?php if (array_key_exists('confirmaclave', $_POST) && $_POST['confirmaclave']!=null){
                 echo"<p>Este dato es requerido</p>";
           }
         ?>
@@ -228,16 +254,6 @@ $usuarioValido=[];
         <p class="legales2">Copy right Lorem ipsum dolor sit amet.</p>
       </div>
 
-      <!-- <div class="seguinos">
-        <ul>
-          <li><a href="#"><i class="fa fa-github-square"></i></a></li>
-          <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
-          <li><a href="#"><i class="fa fa-snapchat-square"></i></a></li>
-          <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
-          <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
-        </ul>
-      </div> -->
-
     </footer>
 
   </body>
@@ -250,7 +266,7 @@ obj.style.height = "380px";
 }
 function contraer(alturaencabezado){
 var obj = document.getElementById('alturaencabezado'); 
-obj.style.height = "230px";
+obj.style.height = "400px";
 
 }
 

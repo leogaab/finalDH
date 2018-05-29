@@ -1,3 +1,2 @@
-# finalDH
-Entregas Sprints DH
-Sprint Nro 2 - Lunes 9 de Abril de 2018
+# sprintTres
+Dentro de POO está la base de datos.

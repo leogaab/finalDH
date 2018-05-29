@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -36,42 +35,40 @@ session_start();
 						</div>
 					</div>
 					<div class="encabezado" id="alturaencabezado">
-						<?php 
-						
-							if($_SESSION){
-							$fotoUsuario = $_SESSION["foto"];
-							
-							echo "<div class='cont-reg-carr'>";
-							echo "<nav class='nav-reg'>";
-								echo "<ul>"; 
-									echo "<li><img src=".$fotoUsuario." width='30px'></li>";
-									echo "<li>Hola:"." ".$_SESSION['nombre']."</li>";
-									echo "<li><a href='./modificarDatos.php'>Modificar Datos</a></li>";
-									echo "<li><a href='./cerrarSesion.php'>Cerrar Sesion</a></li>";
-								echo"</ul>";
-							echo"</nav>";	
-								
-							echo"<div class='carrito'>";
-									echo"<img src='images/carrito.png' alt='email'><p>Carrito: Vacio</p>";
-							echo "</div>";
-						echo "</div>";
-							}
-							else {
-								echo "<div class='cont-reg-carr'>";
-									echo "<nav class='nav-reg'>";
-										echo "<ul>";
-											echo"<li><a href='./login.php'>Ingresa</a></li>";
-											echo"<li><a href='./registro.php'>Registrate</a></li>";
-										echo"</ul>";
-									echo"</nav>";	
-									echo"<div class='carrito'>";
-										echo"<img src='images/carrito.png' alt='email'><p>Carrito: Vacio</p>";
-									echo "</div>";
-								echo "</div>";	
-								}
-						
-						
-						?>
+						<?php if ($_SESSION): $fotoUsuario = $_SESSION["foto"]; ?>
+						<div class='cont-reg-carr'>
+							<nav class='nav-reg'>
+								<ul>
+								<li><img src='<?= $fotoUsuario ?>' width='30px'></li>
+								<li><?php echo "Hola: " . $_SESSION['nombre'] ?></li>
+									<li><a href=''>Mi Cuenta</a>
+										<ul>
+											<li><a href='./modificarDatos.php'>Modificar Datos</a></li>
+											<li><a href='./cerrarSesion.php'>Salir</a></li>
+										</ul>
+									</li>
+								</ul>
+							</nav>
+							<div class='carrito'>
+								<img src='images/carrito.png' alt='email'><p>Carrito: Vacio</p>
+							</div>
+						</div>
+
+						<?php else: ?>
+
+						<div class='cont-reg-carr'>
+							<nav class='nav-reg'>
+								<ul>
+									<li><a href='./login.php'>Ingresa</a></li>
+									<li><a href='./registro.php'>Registrate</a></li>
+								</ul>
+							</nav>
+							<div class='carrito'>
+							<img src='images/carrito.png' alt='email'><p>Carrito: Vacio</p>
+							</div>
+						</div>
+
+						<?php endif; ?>
 						
 						<div class="logo">
 							<img src="images/logo.png">
@@ -79,9 +76,9 @@ session_start();
 						<nav class="navegadorprincipal">
 								<ul>
 									<li><a href="./index.php">Home</a></li>
-									<li><a href="./nosotros.html">Nosotros</a></li>
+									<li><a href="./nosotros.php">Nosotros</a></li>
 									<li><a href="#productos">Tienda</a></li>
-									<li><a href="./faqs.html">Preguntas</a></li>
+									<li><a href="./faqs.php">Preguntas</a></li>
 									<li><a href="#contacto">Contacto</a></li>
 								</ul>
 						</nav>
@@ -90,9 +87,9 @@ session_start();
 		                        <button class="dropbtn" onclick="desplegar(this)"><img src="images/logoMenu.png"></button>
 		                        <div class="dropdown-content">
 		                        	<a href="./index.php">Home</a>
-		                            <a href="./nosotros.html">Nosotros</a>
+		                            <a href="./nosotros.php">Nosotros</a>
 		                            <a href="./index.php">Tienda</a>
-		                            <a href="./faqs.html">Preguntas</a>
+		                            <a href="./faqs.php">Preguntas</a>
 		                            <a href="./index.php">Contacto</a>
 		                        </div>
 		                    </div>
@@ -301,7 +298,7 @@ obj.style.height = "380px";
 }
 function contraer(alturaencabezado){
 var obj = document.getElementById('alturaencabezado'); 
-obj.style.height = "230px";
+obj.style.height = "400px";
 
 }
 
